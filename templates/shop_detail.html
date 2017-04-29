@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li
+            {% if message.tags %} class="{{ message.tags }}"
+            {% endif %}>{% if "extra_safe" in message.tags %}
+        {{ message|safe }}{% else %}{{ message }}{% endif %}
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<h1>{{ name }}</h1>
+
+
+{{ instance.id }}<br/>
+{{ instance.name }}<br/>
+{{ instance.description }}<br/>
+{{ instance.main_category }}<br/>
+{{ instance.categories }}<br/>
+{{ instance.shop_level }}<br/>
+{{ instance.is_in_lottery }}<br/>
+{{ instance.date_of_creation }}<br/>
+{{ instance.date_of_update }}<br/>
+
+</body>
+</html>

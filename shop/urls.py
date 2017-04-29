@@ -8,10 +8,10 @@ from django.conf.urls import include, url
 from .views import (shop_list, shop_create, shop_edit, shop_delete, shop_detail)
 
 urlpatterns = [
-    url(r'^$', shop_list),
+    url(r'^$', shop_list, name='list'),
     url(r'^create/$', shop_create),
-    url(r'^edit/$', shop_edit),
-    url(r'^delete/$', shop_delete),
-    url(r'^detail/$', shop_detail),
+    url(r'^(?P<id>\d+)/edit/$', shop_edit, name='update'),
+    url(r'^(?P<id>\d+)/delete/$', shop_delete),
+    url(r'^(?P<id>\d+)/$', shop_detail, name='detail'),
 
 ]
