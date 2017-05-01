@@ -1,18 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+{% extends "base.html" %}
 
-</head>
-<body>
+{% block content %}
+
 <h1>{{ name }} </h1>
 
 {% for obj in object_list %}
 
 /shop/id/
 {% url "shop:detail" id=obj.id %}
-/* Versatile pattern for ur - hyperlink to shop */
 <a href='{{ obj.get_absolute_url }}'>{{ obj.name }}</a><br/>
 
 {{ obj.id }}<br/>
@@ -27,5 +22,4 @@
 
 
 {% endfor %}
-</body>
-</html>
+{% endblock content %}

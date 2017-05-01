@@ -18,7 +18,7 @@ class Shop(models.Model):
     name = models.CharField(max_length=50, )
     description = models.TextField()
     # logo = models.ImageField(upload_to=user_directory_path)
-    # logo = models.ImageField('')
+    logo = models.FileField(null=True, blank=True)
     main_category = models.CharField(max_length=50)
     categories = models.TextField()
     shop_level = models.IntegerField()

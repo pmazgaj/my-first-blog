@@ -8,39 +8,45 @@ from django.shortcuts import redirect
 
 from django.contrib import messages
 from django.http import HttpResponseRedirect
+from django.http import Http404
 from .models import Shop
 from .forms import ShopForm
 
 
 def shop_create(request):
     """
-    create shop
+    create shop, with superuser or staff members validation
     """
-    form = ShopForm(request.POST or None)
+    if not request.user.is_superuser or not request.user.is_staff:
+        raise Http404
+
+    form = ShopForm(request.POST or None, request.FILES or None)
+
     if form.is_valid():
         instance = form.save(commit=False)
         instance.save()
 
         # after creation - redirect to Shop page
-        messages.success(request, "Successfully created shop")
+        messages.success(request, "Successfully created shop with id {}".format(instance.id))
         return HttpResponseRedirect(instance.get_absolute_url())
-    else:
-        messages.error(request, "Shop was not successfully created!")
 
     context = {
         "form": form,
     }
-    return render(request, "post_form.html", context)
+    return render(request, "shop_form.html", context)
 
 
 def shop_edit(request, id=None):
     """
-    edit shop
+    edit shop, with superuser validation
     """
+    if not request.user.is_superuser:
+        raise Http404
+
     instance = get_object_or_404(Shop, id=id)  # look for given id, if not present - render 404 error
 
     # param instance - edit an instance (fill the fields)
-    form = ShopForm(request.POST or None, instance=instance)
+    form = ShopForm(request.POST or None, request.FILES or None, instance=instance)
     if form.is_valid():
         instance = form.save(commit=False)
         instance.save()
@@ -48,17 +54,20 @@ def shop_edit(request, id=None):
         return HttpResponseRedirect(instance.get_absolute_url())
 
     context = {
-        "name": instance.name,
+        "name":     instance.name,
         "instance": instance,
-        "form": form,
+        "form":     form,
     }
-    return render(request, "post_form.html", context)
+    return render(request, "shop_form.html", context)
 
 
 def shop_delete(request, id=None):
     """
-    delete shop
+    delete shop, with superuser validation
     """
+    if not request.user.is_superuser:
+        raise Http404
+
     instance = get_object_or_404(Shop, id=id)  # look for given id, if not present - render 404 error
 
     instance.delete()
@@ -73,7 +82,7 @@ def shop_detail(request, id=None):
     """
     instance = get_object_or_404(Shop, id=id)  # look for given id, if not present - render 404 error
     context = {
-        "name": instance.name,
+        "name":     instance.name,
         "instance": instance,
     }
     return render(request, "shop_detail.html", context)
@@ -85,7 +94,7 @@ def shop_list(request):
     """
     queryset = Shop.objects.all()
     context = {
-        "name": "List",
+        "name":        "List of shops",
         "object_list": queryset
     }
-    return render(request, "index.html", context)
+    return render(request, "shop_list.html", context)

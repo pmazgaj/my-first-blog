@@ -20,5 +20,6 @@ class ShopForm(forms.ModelForm):
             "categories",
             "shop_level",
             "is_in_lottery",
+            "logo",
 
         ]
