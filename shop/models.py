@@ -18,6 +18,7 @@ class Shop(models.Model):
     name = models.CharField(max_length=50, )
     description = models.TextField()
     # logo = models.ImageField(upload_to=user_directory_path)
+
     logo = models.FileField(null=True, blank=True)
     main_category = models.CharField(max_length=50)
     categories = models.TextField()
@@ -25,10 +26,6 @@ class Shop(models.Model):
     is_in_lottery = models.BooleanField(default=False)
     date_of_creation = models.DateTimeField(auto_now=False, auto_now_add=True)
     date_of_update = models.DateTimeField(auto_now=True, auto_now_add=False)
-
-    def update_shop(self):
-        self.date_of_update = timezone.now()
-        self.save()
 
     def __str__(self):
         return self.name

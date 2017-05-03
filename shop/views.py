@@ -93,6 +93,7 @@ def shop_list(request):
     list of shops
     """
     queryset = Shop.objects.all()
+    print(queryset)
     context = {
         "name":        "List of shops",
         "object_list": queryset

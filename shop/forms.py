@@ -7,7 +7,7 @@ from .models import Shop
 
 class ShopForm(forms.ModelForm):
     """
-    Specifies what you're adding into form.
+    Specifies what you're adding into Shop form.
     Don't use automatic fields.
     """
 
