@@ -36,6 +36,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'shop',
+    'rest_framework',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -101,3 +102,16 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'public', 'static')
 # url for media files
 MEDIA_URL = "/media/"
 # MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media_cdn"))
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
+}
+

@@ -2,23 +2,32 @@
 Creates views for shop application
 """
 
-from django.shortcuts import render
+from django.contrib import messages
+from django.http import Http404
+from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
+from django.shortcuts import render
 
-from django.contrib import messages
-from django.http import HttpResponseRedirect
-from django.http import Http404
-from .models import Shop
 from .forms import ShopForm
+from .models import Shop
+
+
+def validate_user(request):
+    """
+    return True if user is superuser or staff, else raise 404
+    """
+    if not request.user.is_superuser or not request.user.is_staff:
+        raise Http404
+
+    return True
 
 
 def shop_create(request):
     """
     create shop, with superuser or staff members validation
     """
-    if not request.user.is_superuser or not request.user.is_staff:
-        raise Http404
+    validate_user(request)
 
     form = ShopForm(request.POST or None, request.FILES or None)
 
@@ -40,8 +49,7 @@ def shop_edit(request, id=None):
     """
     edit shop, with superuser validation
     """
-    if not request.user.is_superuser:
-        raise Http404
+    validate_user(request)
 
     instance = get_object_or_404(Shop, id=id)  # look for given id, if not present - render 404 error
 
@@ -65,8 +73,7 @@ def shop_delete(request, id=None):
     """
     delete shop, with superuser validation
     """
-    if not request.user.is_superuser:
-        raise Http404
+    validate_user(request)
 
     instance = get_object_or_404(Shop, id=id)  # look for given id, if not present - render 404 error
 
@@ -93,7 +100,7 @@ def shop_list(request):
     list of shops
     """
     queryset = Shop.objects.all()
-    print(queryset)
+
     context = {
         "name":        "List of shops",
         "object_list": queryset

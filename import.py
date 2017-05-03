@@ -6,18 +6,17 @@ import csv
 import sys
 import os
 import django
-from shop.models import Shop
-from shop.models import Category
 
+# from ims.ims_site.shop.models import Shop
+# from ims.ims_site.shop.models import Category
 
 __author__ = "Przemek"
 
 project_dir = "C:/IMS_ZADANIE/ims/ims_site/ims_site"
 
 sys.path.append(project_dir)
-os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 
-django.setup()
+os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 
 
 def parse_shop(path):
@@ -25,9 +24,11 @@ def parse_shop(path):
     parse information from shop file, 
     if key not found - set default
     """
+    django.setup()
+
     reader = csv.DictReader(open(path))
     for row in reader:
-        shop = Shop()
+        shop = md.Shop()
         # shop.id = row.get('category_id', 0)
         shop.name = row.get('name', '--default--')
         shop.description = row.get('description', '--default--')
@@ -44,10 +45,11 @@ def parse_category(path):
     """
     parse information for category
     """
+    django.setup()
 
     reader = csv.DictReader(open(path))
     for row in reader:
-        category = Category()
+        category = md.Category()
         category.id = row.get('id', 0)
         category.name = row.get('name', '--name--')
         category.visible = row.get('visible', True)

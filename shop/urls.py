@@ -1,6 +1,7 @@
 """
-Defines urls for post applications (separately).
-Home page - shop_list. Remnant - suburls.
+Defines urls for shop applications (separately).
+Home page - shop_list. 
+Remnant - suburls.
 """
 
 from django.conf.urls import include, url
