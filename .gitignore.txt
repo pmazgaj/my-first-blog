@@ -1,0 +1,9 @@
+*.pyc
+__pycache__
+virtpy
+db.sqlite3
+.DS_Store
+.txt
+*.md
+categories.csv
+shops.csv
