@@ -6,15 +6,14 @@ import csv
 import sys
 import os
 import django
-
-# from ims.ims_site.shop.models import Shop
-# from ims.ims_site.shop.models import Category
-
+import logging
+from paths import IMS_PROJECT_PATH, PROJECT_PATH, CSV_PATH
 __author__ = "Przemek"
 
-project_dir = "C:/IMS_ZADANIE/ims/ims_site/ims_site"
-
-sys.path.append(project_dir)
+sys.path.append(IMS_PROJECT_PATH)
+sys.path.append(PROJECT_PATH)
+print(IMS_PROJECT_PATH)
+print(PROJECT_PATH)
 
 os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 
@@ -28,7 +27,7 @@ def parse_shop(path):
 
     reader = csv.DictReader(open(path))
     for row in reader:
-        shop = md.Shop()
+        shop = Shop()
         # shop.id = row.get('category_id', 0)
         shop.name = row.get('name', '--default--')
         shop.description = row.get('description', '--default--')
@@ -55,5 +54,6 @@ def parse_category(path):
         category.visible = row.get('visible', True)
         category.save()
 
-parse_category("C:/IMS_ZADANIE/ims/ims_site/categories.csv")
-# parse_shop("C:/IMS_ZADANIE/ims/ims_site/shops.csv")
+
+parse_category(os.path.join(CSV_PATH, 'categories.csv'))
+parse_shop(os.path.join(CSV_PATH, 'shops.csv'))
