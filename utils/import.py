@@ -3,18 +3,9 @@ File for importing csv directly into models.
 Currently - for shop and category models.
 """
 import csv
-import sys
 import os
-# import django
 
-from ims.definitions import root_dir, csv_dir
-from ims.ims_site.shop.models import Shop, Category
-
-__author__ = "Przemek"
-
-sys.path.append(root_dir)
-
-# os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
+from definitions import csv_dir
 
 
 def parse_shop(filename):
@@ -60,5 +51,5 @@ def parse_category(filename):
     # return category
 
 
-shops = parse_shop(filename="shops.csv")
-categories = parse_shop(filename="categories.csv")
+parse_shop(filename="shops.csv")
+parse_shop(filename="categories.csv")
