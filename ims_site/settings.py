@@ -97,10 +97,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 # url for media files
 MEDIA_URL = "/media/"
-# MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media_cdn"))
-
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media_cdn")
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES':     (
@@ -113,7 +113,7 @@ REST_FRAMEWORK = {
     ),
 }
 
-# STATICFILES_DIRS = (
-#     STATIC_ROOT,
-#     '/var/www/static/',
-# )
+STATICFILES_DIRS = (
+    MEDIA_ROOT,
+    '/var/www/static/',
+)

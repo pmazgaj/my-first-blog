@@ -9,9 +9,15 @@
 
 <h1>{{ name }}</h1>
 
-<!--<script src="{% static "js/shitty_popup.js" %}" alt="My image"/>-->
+<script>
+function kill_me(){
+    alert('Showing shop with name \n{{ instance.name }}')
+}
 
-<script src="static/js/shitty_popup.js"></script>
+console.log('hey you!');
+kill_me();
+
+</script>
 
 {{ instance.id }}<br/>
 {{ instance.name }}<br/>
