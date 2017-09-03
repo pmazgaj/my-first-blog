@@ -5,30 +5,30 @@ Currently - for shop and category models.
 import csv
 import sys
 import os
-import django
+# import django
 
-# from ims.ims_site.shop.models import Shop
-# from ims.ims_site.shop.models import Category
+from ims.definitions import root_dir, csv_dir
+from ims.ims_site.shop.models import Shop, Category
 
 __author__ = "Przemek"
 
-project_dir = "C:/IMS_ZADANIE/ims/ims_site/ims_site"
+sys.path.append(root_dir)
 
-sys.path.append(project_dir)
-
-os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
+# os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 
 
-def parse_shop(path):
+def parse_shop(filename):
     """
     parse information from shop file, 
     if key not found - set default
     """
-    django.setup()
+    # django.setup()
+
+    path = os.path.join(csv_dir, filename)
 
     reader = csv.DictReader(open(path))
     for row in reader:
-        shop = md.Shop()
+        shop = Shop()
         # shop.id = row.get('category_id', 0)
         shop.name = row.get('name', '--default--')
         shop.description = row.get('description', '--default--')
@@ -39,21 +39,26 @@ def parse_shop(path):
         shop.date_of_creation = row.get('created_at', '--default--')
         shop.date_of_update = row.get('updated_at', '--default--')
         shop.save()
+    # return shop
 
 
-def parse_category(path):
+def parse_category(filename):
     """
     parse information for category
     """
-    django.setup()
+    # django.setup()
+
+    path = os.path.join(csv_dir, filename)
 
     reader = csv.DictReader(open(path))
     for row in reader:
-        category = md.Category()
+        category = Category()
         category.id = row.get('id', 0)
         category.name = row.get('name', '--name--')
         category.visible = row.get('visible', True)
         category.save()
+    # return category
 
-parse_category("C:/IMS_ZADANIE/ims/ims_site/categories.csv")
-# parse_shop("C:/IMS_ZADANIE/ims/ims_site/shops.csv")
+
+shops = parse_shop(filename="shops.csv")
+categories = parse_shop(filename="categories.csv")

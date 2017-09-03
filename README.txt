@@ -1,6 +1,10 @@
 Summary:
 Python version 3.52, Django 1.11
 
+How to run:
+In main project folder (ims_site, where manage.py is located) run:
+python manage.py runserver
+
 Get all posts from api:
 http://127.0.0.1:8000/api/shop/
 

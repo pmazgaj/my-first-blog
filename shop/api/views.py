@@ -7,7 +7,6 @@ from rest_framework.response import Response
 from .serializers import ShopSerializer
 
 from shop.models import Shop
-from shop.models import Category
 
 __author__ = "Przemek"
 

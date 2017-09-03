@@ -10,7 +10,6 @@ urlpatterns = [
     url(r'^shop/', include("shop.urls", namespace='shop')),
     url(r'^api/', include("shop.api.urls")),
 
-
     # url(r'^api.auth/$', views.AuthView.as_view(), name="authenticate"),
 
     # url(r'^shops/$', include("<appname>.views.<function_name>")),
