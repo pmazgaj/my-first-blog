@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load staticfiles %}
 
 {% block head_title %}
 {{ instance.title }} | {{ block.super }}
@@ -9,6 +9,9 @@
 
 <h1>{{ name }}</h1>
 
+<!--<script src="{% static "js/shitty_popup.js" %}" alt="My image"/>-->
+
+<script src="static/js/shitty_popup.js"></script>
 
 {{ instance.id }}<br/>
 {{ instance.name }}<br/>

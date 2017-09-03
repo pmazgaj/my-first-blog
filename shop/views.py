@@ -74,7 +74,7 @@ def shop_delete(request, id=None):
     delete shop, with superuser validation
     """
     validate_user(request)
-
+    print('user validated')
     instance = get_object_or_404(Shop, id=id)  # look for given id, if not present - render 404 error
 
     instance.delete()
@@ -88,11 +88,12 @@ def shop_detail(request, id=None):
     display shop info
     """
     instance = get_object_or_404(Shop, id=id)  # look for given id, if not present - render 404 error
+
     context = {
         "name":     instance.name,
         "instance": instance,
     }
-    return render(request, "shop_detail.html", context)
+    return render(request, 'shop_detail.html', context)
 
 
 def shop_list(request):
@@ -105,4 +106,4 @@ def shop_list(request):
         "name":        "List of shops",
         "object_list": queryset
     }
-    return render(request, "shop_list.html", context)
+    return render(request, 'shop_list.html', context)
