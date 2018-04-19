@@ -5,10 +5,10 @@ How to run:
 In main project folder (ims_site, where manage.py is located) run:
 python manage.py runserver
 
-Get all posts from api:
+Get all shops from api:
 http://127.0.0.1:8000/api/shop/
 
-Get specific post from api:
+Get specific shop from api:
 http://127.0.0.1:8000/api/shop/<shop_number>/
 
 Edit specific shop:
