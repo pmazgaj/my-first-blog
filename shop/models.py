@@ -1,9 +1,5 @@
 from django.db import models
 from django.core.urlresolvers import reverse
-# from django.contrib.auth.models import User
-#
-# users = User.objects.all()
-# print(users)
 
 
 def user_directory_path(instance, filename):
@@ -33,11 +29,13 @@ class Shop(models.Model):
     def __str__(self):
         return self.name
 
+    def __repr__(self):
+        return self.__str__()
+
     def get_absolute_url(self):
         """
         Returns absolute url for Shop model, based on id
         """
-        # namespace - detail
         return reverse("shop:detail", kwargs={"id": self.id})
 
 

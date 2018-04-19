@@ -8,6 +8,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.shortcuts import render
+from django.views.generic import ListView
 
 from .forms import ShopForm
 from .models import Shop
@@ -94,6 +95,22 @@ def shop_detail(request, id=None):
         "instance": instance,
     }
     return render(request, 'shop_detail.html', context)
+
+
+class ShopListView(ListView):
+    model = Shop
+    template_name = 'shop_list.html'
+
+    def get_queryset(self):
+        return self.model.objects.all()
+
+    def get(self, request, *args, **kwargs):
+        context = {
+            "name":        "List of shops",
+            "object_list": self.queryset
+        }
+
+        return render(request, self.template_name, context)
 
 
 def shop_list(request):
