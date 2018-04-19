@@ -44,5 +44,5 @@ class CsvParsers:
 
 if __name__ == '__main__':
     csv_parser = CsvParsers()
-    # parse_category()
+    csv_parser.parse_category()
     csv_parser.parse_shop()

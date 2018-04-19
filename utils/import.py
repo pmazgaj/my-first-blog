@@ -4,12 +4,10 @@ Currently - for shop and category models.
 """
 import csv
 import django
-import os
+import os, sys
 
 from shop.models import Shop
 from utils.parse_csv import CsvParsers
-
-django.setup()
 
 
 class FillModelsFromCsvData:
@@ -34,7 +32,6 @@ class FillModelsFromCsvData:
             shop.date_of_creation = row.get('created_at', '--default--')
             shop.date_of_update = row.get('updated_at', '--default--')
             shop.save()
-        # return shop
 
     def import_category_data(self):
         """
@@ -53,5 +50,4 @@ class FillModelsFromCsvData:
 
 if __name__ == '__main__':
     model_filler = FillModelsFromCsvData()
-    model_filler.import_shop_data(filename="shops.csv")
-    model_filler.import_category_data(filename="categories.csv")
+    model_filler.import_shop_data()
