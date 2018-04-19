@@ -7,6 +7,7 @@ import os
 from constants import CSV_FILE_PATH
 
 __author__ = "Przemek"
+# print()
 
 
 class CsvParsers:
