@@ -15,7 +15,6 @@ class ShopSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Shop
-        # fields = ('name', 'description')
         fields = '__all__'
 
 

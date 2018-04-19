@@ -1,9 +1,13 @@
 """
 Creates API views for shop application
 """
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.generics import RetrieveAPIView
+from rest_framework.permissions import AllowAny
 from rest_framework.views import APIView
 from rest_framework.response import Response
+
+from shop.api import serializers
 from .serializers import ShopSerializer
 
 from shop.models import Shop
@@ -32,7 +36,7 @@ class ShopListApiView(APIView):
         """
         Get api data for all shops, with authenticated login.
         """
-        if validate_user(request):
+        if not validate_user(request):
             shops = Shop.objects.all()
             serializer = ShopSerializer(shops, many=True)
 
@@ -45,16 +49,17 @@ class ShopDetailApiView(RetrieveAPIView):
     lookup_field = 'id'
     # lookup_url_kwarg = 'id'
 
-# class AuthView(APIView):
-#     """
-#     Authentication for post
-#     """
-#     authentication_classes = (SessionAuthentication, BasicAuthentication)
-#     permission_classes = [AllowAny]
-#     serializer_class = serializers.ShopSerializer
-#
-#     def post(self, request, *args, **kwargs):
-#         return Response(self.serializer_class(request.user).data)
-#
-#     def get(self, request, *args, **kwargs):
-#         return Response(self.serializer_class(request.user).data)
+
+class AuthView(APIView):
+    """
+    Authentication for post
+    """
+    authentication_classes = (SessionAuthentication, BasicAuthentication)
+    permission_classes = [AllowAny]
+    serializer_class = serializers.ShopSerializer
+
+    def post(self, request, *args, **kwargs):
+        return Response(self.serializer_class(request.user).data)
+
+    def get(self, request, *args, **kwargs):
+        return Response(self.serializer_class(request.user).data)

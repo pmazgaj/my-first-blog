@@ -1,5 +1,5 @@
 """
-Used for editing forms (e.g. adding new Shop
+Used for editing forms (e.g. adding new Shop)
 """
 from django import forms
 from .models import Shop
@@ -21,5 +21,4 @@ class ShopForm(forms.ModelForm):
             "shop_level",
             "is_in_lottery",
             "logo",
-
         ]
