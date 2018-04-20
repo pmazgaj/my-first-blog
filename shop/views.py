@@ -3,11 +3,8 @@ Creates views for shop application
 """
 
 from django.contrib import messages
-from django.http import Http404
-from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404
-from django.shortcuts import redirect
-from django.shortcuts import render
+from django.http import Http404, HttpResponseRedirect
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import ListView
 
 from .forms import ShopForm
